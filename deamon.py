@@ -11,8 +11,9 @@ async def on_ready():
 @client.event
 async def on_message(message):
   if message.author != client.user:
-#      if "ラーメン占い" in message.content:
-      if message.content.startswith("ラーメン占い"):
+    if client.user in message.mentions:
+#      if message.content.startswith("ラーメン占い"):
+      if "ラーメン" in message.content:
         num = random.randint(0,100)
 
         if num < 4:
@@ -48,7 +49,7 @@ async def on_message(message):
           msg += "前から食べたかった店。初来訪\n"
           msg += "様々な味のするとても優しいスープ。とにかくやさしい。\n"
           msg += "トッピングも美味しい。チャーシュー丼もたっぷりの肉としっかり味がついており良さ"
-          ramen_url = "https://pbs.twimg.com/media/EVKbFuhUcAIoXVF?format=jpg&name=large"
+          ramen_url = "https://pbs.twimg.com/media/EVKZuWXUUAA80bi?format=jpg&name=large"
           ramen_url2 = "https://pbs.twimg.com/media/EVKZuCuU8AAs3Xx?format=jpg&name=large"
 
         elif 16 <= num < 20: 
@@ -236,21 +237,45 @@ async def on_message(message):
         embed = discord.Embed(title=shop_title,description=msg,color=discord.Colour.red())
         embed.set_image(url=ramen_url)
 
-        if 'ramen_url2' in locals():
-          await message.channel.send(embed=embed)
-          embed = discord.Embed(color=discord.Colour.red())
-          embed.set_image(url=ramen_url2)
+#        if 'ramen_url2' in locals():
+#          await message.channel.send(embed=embed)
+#          embed = discord.Embed(color=discord.Colour.red())
+#          embed.set_image(url=ramen_url2)
 
-        if 'ramen_url3' in locals():
-          await message.channel.send(embed=embed)
-          embed = discord.Embed(color=discord.Colour.red())
-          embed.set_image(url=ramen_url3)
+#        if 'ramen_url3' in locals():
+#          await message.channel.send(embed=embed)
+#          embed = discord.Embed(color=discord.Colour.red())
+#          embed.set_image(url=ramen_url3)
 
-        if 'ramen_url4' in locals():
-          await message.channel.send(embed=embed)
-          embed = discord.Embed(color=discord.Colour.red())
-          embed.set_image(url=ramen_url4)
+#        if 'ramen_url4' in locals():
+#          await message.channel.send(embed=embed)
+#          embed = discord.Embed(color=discord.Colour.red())
+#          embed.set_image(url=ramen_url4)
 
         await message.channel.send(embed=embed)
+ 
+#      if message.content.startswith(""):
+#        reply = '{message.author.mention} あ？'
+#        await message.channel.send(reply)
 
-client.run(deamon_apikey)
+      else:
+        num = random.randint(0,100)
+
+        if num < 20:
+          msg = message.author.mention + " あ？"
+
+        elif 20 <= num < 40:
+          msg = message.author.mention + " だるい"
+       
+        elif 40 <= num < 60:
+          msg = message.author.mention + " 無限に休みたすぎる" 
+ 
+        elif 60 <= num < 80:
+          msg = message.author.mention + " ラーメン食いたくね？"
+
+        else:
+          msg = message.author.mention + " うるせえな:demon:"
+
+        await message.channel.send(msg)
+
+client.run(apikey.deamon_apikey)
